@@ -27,7 +27,6 @@ const arrayHasAllSameValues = (arr) => {
 const calculateNextNumber = (history) => {
     const diffs = []
     let i = 0;
-    let curNum = history[i];
     for (i; i < history.length - 1; i++) {
         const nextNum = history[i + 1]
         const curNum = history[i]
@@ -35,7 +34,7 @@ const calculateNextNumber = (history) => {
         diffs.push(diff)
     }
     const diffsAreSame = arrayHasAllSameValues(diffs)
-    if(diffsAreSame) {
+    if (diffsAreSame) {
         return history[history.length - 1] + diffs[0]
     }
     const nextLastItem = calculateNextNumber(diffs)
@@ -46,25 +45,19 @@ const calculateNextNumber = (history) => {
 const run = async () => {
     const input = await getInput()
     const history = getHistory(input)
+    console.log('Part 1:')
     console.time('part1')
-    const part1Nums = [];
-    for (const line of history) {
-        const nextNum = calculateNextNumber(line)
-        part1Nums.push(nextNum)
-    }
+    const part1Nums = history.map(line => calculateNextNumber(line))
     const sumPart1 = part1Nums.reduce((a, b) => a + b, 0)
     console.timeEnd('part1')
-    console.log('Part 1 total: ', sumPart1)
+    console.log('Part 1 result: ', sumPart1)
 
+    console.log('\nPart 2:')
     console.time('part2')
-    const part2Nums = [];
-    for (const line of history) {
-        const nextNum = calculateNextNumber(line.reverse())
-        part2Nums.push(nextNum)
-    }
+    const part2Nums = history.map(line => calculateNextNumber(line.reverse()))
     const sumPart2 = part2Nums.reduce((a, b) => a + b, 0)
     console.timeEnd('part2')
-    console.log('Part 2 total: ', sumPart2)
+    console.log('Part 2 result: ', sumPart2)
 }
 
 run();
