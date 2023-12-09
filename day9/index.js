@@ -42,29 +42,29 @@ const calculateNextNumber = (history) => {
     return nextLastItem + history[history.length - 1]
 }
 
-const part1 = async () => {
+
+const run = async () => {
     const input = await getInput()
     const history = getHistory(input)
-    const nextNums = [];
+    console.time('part1')
+    const part1Nums = [];
     for (const line of history) {
         const nextNum = calculateNextNumber(line)
-        nextNums.push(nextNum)
+        part1Nums.push(nextNum)
     }
-    const sum = nextNums.reduce((a, b) => a + b, 0)
-    console.log('Part 1 total: ', sum)
-}
+    const sumPart1 = part1Nums.reduce((a, b) => a + b, 0)
+    console.timeEnd('part1')
+    console.log('Part 1 total: ', sumPart1)
 
-const part2 = async () => {
-    const input = await getInput()
-    const history = getHistory(input)
-    const nextNums = [];
+    console.time('part2')
+    const part2Nums = [];
     for (const line of history) {
         const nextNum = calculateNextNumber(line.reverse())
-        nextNums.push(nextNum)
+        part2Nums.push(nextNum)
     }
-    const sum = nextNums.reduce((a, b) => a + b, 0)
-    console.log('Part 2 total: ', sum)
+    const sumPart2 = part2Nums.reduce((a, b) => a + b, 0)
+    console.timeEnd('part2')
+    console.log('Part 2 total: ', sumPart2)
 }
 
-part1();
-part2();
+run();
